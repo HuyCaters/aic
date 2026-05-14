@@ -1,0 +1,61 @@
+services:
+  app:
+    build: ./app
+    ports:
+      - "8000:80"
+    volumes:
+      - type: bind
+        source: ../public_html
+        target: /home/public_html
+    tty: true
+    depends_on:
+      - db
+
+  db:
+    build: ./db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    volumes:
+      - type: volume
+        source: cms-db-volume
+        target: /var/lib/mysql
+
+  email:
+    image: axllent/mailpit:v1.10.1
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    volumes:
+      - type: bind
+        source: ./email/data
+        target: /home/data
+    environment:
+      - TZ=Asia/Tokyo
+      - MP_DATABASE=/home/data/mailpit.db
+    
+  phpmyadmin:
+    image: phpmyadmin:latest
+    platform: linux/amd64
+    ports:
+      - "3001:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=db
+      - PMA_USER=root
+      - PMA_PASSWORD=secret
+      - UPLOAD_LIMIT=1G
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  cms-db-volume:
+  wp-includes-volume:
+  wp-admin-volume:
