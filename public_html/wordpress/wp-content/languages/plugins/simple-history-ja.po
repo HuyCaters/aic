@@ -1,0 +1,71 @@
+# Translation of Plugins - Simple History – Track, Log, and Audit WordPress Changes - Development (trunk) in Japanese
+# This file is distributed under the same license as the Plugins - Simple History – Track, Log, and Audit WordPress Changes - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-04-02 13:21:03+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - Simple History – Track, Log, and Audit WordPress Changes - Development (trunk)\n"
+
+#: dropins/class-rss-dropin.php:85
+#: inc/services/class-email-report-service.php:303
+msgid "Enable"
+msgstr "有効化"
+
+#: loggers/class-media-logger.php:284 loggers/class-post-logger.php:1176
+msgid "Title"
+msgstr "タイトル"
+
+#: loggers/class-comments-logger.php:663
+msgid "Pending"
+msgstr "保留"
+
+#: loggers/class-comments-logger.php:678
+msgid "Comment"
+msgstr "コメント"
+
+#: loggers/class-comments-logger.php:661
+msgid "Approved"
+msgstr "承認済み"
+
+#: loggers/class-post-logger.php:1200
+msgid "Status"
+msgstr "状態"
+
+#: loggers/class-post-logger.php:1265
+msgid "Author"
+msgstr "登録者"
+
+#: loggers/class-post-logger.php:1188
+msgid "Content"
+msgstr "コンテンツ"
+
+#: loggers/class-post-logger.php:1316
+msgid "Template"
+msgstr "テンプレート"
+
+#: loggers/class-post-logger.php:1226
+msgid "Permalink"
+msgstr "パーマリンク"
+
+#: inc/services/class-plugin-list-link.php:45
+#: inc/services/class-setup-settings-page.php:171
+#: inc/services/class-setup-settings-page.php:172 build/index-admin-bar.js:6
+msgid "Settings"
+msgstr "設定"
+
+#: dropins/class-rss-dropin.php:105
+msgid "Regenerate"
+msgstr "再生成"
+
+#: build/index.js:13
+msgid "Current page"
+msgstr "現在のページ"
+
+#: inc/class-stats-view.php:655 templates/email-summary-report.php:320
+msgid "Plugins"
+msgstr "プラグイン"
