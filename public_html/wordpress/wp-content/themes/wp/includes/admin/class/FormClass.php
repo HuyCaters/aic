@@ -293,6 +293,17 @@ class FormClass
             $data = $_SESSION[$this->slug . '_data'] ?? [];
             if (!$data) wp_redirect('/' . $this->slug . '/');
 
+            // verify token
+            $token = $_POST['token'] ?? '';
+            if (!verify_token(str_format('{0}_confirm_token_{1}', $this->slug, $token))) {
+                unset($_SESSION[$this->slug . '_data']);
+                unset($_SESSION[$this->slug . '_errors']);
+
+                $_SESSION[$this->slug . '_errors']['token'] = 'フォームの有効期限が切れました。ページをリロードして、もう一度入力してください。';
+                wp_redirect('/' . $this->slug . '/');
+                exit;
+            }
+
             // データベースに保存
             $this->save_form_data($data);
 
@@ -399,7 +410,6 @@ class FormClass
      * @param array $columns
      * @return array
      */
-
 
     public function add_email_columns($columns)
     {

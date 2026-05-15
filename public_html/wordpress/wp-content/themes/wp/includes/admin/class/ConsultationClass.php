@@ -123,6 +123,10 @@ class ConsultationClass extends FormClass
                 $data['preference'] .= PHP_EOL . "　第３希望日: " . ($data['third_preference_date'] ?? '') . ' ' . ($data['third_preference_time'] ?? '');
             }
         }
+
+        if(!empty($data['consultation_content'])){
+            $data['consultation_content'] = preventGarbledCharacters($data['consultation_content']);
+        }
         return $data;
     }
 }

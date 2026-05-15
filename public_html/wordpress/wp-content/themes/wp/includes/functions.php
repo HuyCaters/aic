@@ -733,35 +733,35 @@ function getListIDCopy($post_type)
 }
 
 
-// ファイル自動生成を停止する設定
-add_filter('big_image_size_threshold', '__return_false');
-
 add_action('init', function () {
     // logs
     set_error_handler('custom_theme_error_logger');
     register_shutdown_function('custom_theme_fatal_logger');
 
     // image size
-    remove_image_size('thumbnail');
-    remove_image_size('medium');
-    remove_image_size('medium_large');
-    remove_image_size('large');
-    remove_image_size('1536x1536');
-    remove_image_size('2048x2048');
+    // remove_image_size('thumbnail');
+    // remove_image_size('medium');
+    // remove_image_size('medium_large');
+    // remove_image_size('large');
+    // remove_image_size('1536x1536');
+    // remove_image_size('2048x2048');
 
     // 公開日時を過ぎた投稿を公開状態に変更
     pubMissedPosts();
 });
 
+// // ファイル自動生成を停止する設定
+// add_filter('big_image_size_threshold', '__return_false');
 
-add_action('after_setup_theme', function () {
-    add_image_size('thumbnail', 150, 150, true);
-});
+// // アイキャッチ画像のサイズを変更
+// add_action('after_setup_theme', function () {
+//     add_image_size('thumbnail', 150, 150, true);
+// });
 
-
-add_filter('intermediate_image_sizes_advanced', function ($sizes) {
-    return ['thumbnail' => $sizes['thumbnail']];
-}, 999);
+// // サムネイル以外の画像サイズを生成しない
+// add_filter('intermediate_image_sizes_advanced', function ($sizes) {
+//     return ['thumbnail' => $sizes['thumbnail']];
+// }, 999);
 //
 
 
@@ -789,4 +789,34 @@ function pubMissedPosts()
             wp_publish_post($post->ID);
         }
     }
+}
+
+/**
+ * トークンの作成
+ * 5分間有効なトークンを作成して保存
+ * @return string
+ */
+
+function create_token($subtext = '', $minutes = 5)
+{
+    $token = wp_generate_password(64, false, false);
+    set_transient(str_format('{0}_{1}', $subtext, $token), true, $minutes * MINUTE_IN_SECONDS);
+    return $token;
+}
+
+
+/**
+ * トークンの検証
+ * 5分間有効なトークンを検証して削除
+ * @param string $token
+ * @return bool
+ */
+
+function verify_token($token)
+{
+    if (get_transient($token)) {
+        delete_transient($token);
+        return true;
+    }
+    return false;
 }

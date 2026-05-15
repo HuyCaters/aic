@@ -20,6 +20,7 @@ unset($_SESSION[$slug . '_data']);
     <form method="POST" enctype="multipart/form-data" class="h-adr">
         <input type="hidden" name="<?= esc_attr($slug) ?>_submit" value="1">
         <span class="p-country-name" style="display:none;">Japan</span>
+        <span class="error" style="color:red"><?= $errors['token'] ?? '' ?></span>
 
         <div class="mb-3">
             <label for="company" class="form-label">会社名</label>

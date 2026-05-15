@@ -65,6 +65,7 @@ $data = $_SESSION[$slug . '_data'];
     </table>
     <form method="POST">
         <input type="hidden" name="<?= esc_attr($slug) ?>_confirm_submit" value="1">
+        <input type="hidden" name="token" value="<?= esc_attr(create_token(str_format('{0}_confirm_token', $slug))) ?>">
         <a href="/<?= esc_attr($slug) ?>/" class="btn">← 前ページへ</a>
         <span class="confirm_submit btn btn-primary">送信</span>
     </form>
